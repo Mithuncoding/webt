@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mithun | Game Hub</title>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+</head>
+<body>
+    <div class="construction-notice">
+        Website under construction. Enjoy these games while the main site is being built! Expected completion: March 2025
+    </div>
+
+    <div id="three-container"></div>
+
+    <header class="hero">
+        <div class="hero-content" data-aos="fade-up">
+            <h1>Hi, I'm Mithun</h1>
+            <p class="subtitle">Software Developer</p>
+            <div class="typing-container">
+                <span id="typing-text"></span><span class="cursor">|</span>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="games-section" data-aos="fade-up">
+            <h2>Featured Games</h2>
+            <div class="games-grid">
+                <div class="game-card" data-game="pacman">
+                    <h3>Pac-Man</h3>
+                    <p>Classic arcade maze game</p>
+                </div>
+                <div class="game-card" data-game="snake">
+                    <h3>Snake.io</h3>
+                    <p>Modern multiplayer snake</p>
+                </div>
+                <div class="game-card" data-game="minesweeper">
+                    <h3>Minesweeper</h3>
+                    <p>Classic puzzle game</p>
+                </div>
+                <div class="game-card" data-game="2048">
+                    <h3>2048</h3>
+                    <p>Number sliding puzzle</p>
+                </div>
+                <div class="game-card" data-game="mario">
+                    <h3>Super Mario</h3>
+                    <p>Classic platformer game</p>
+                </div>
+                <div class="game-card" data-game="dino">
+                    <h3>Chrome Dino</h3>
+                    <p>T-Rex Runner Game</p>
+                </div>
+            </div>
+        </section>
+
+        <div id="game-container" class="hidden">
+            <button id="close-game">Close Game</button>
+            <div id="game-canvas">
+                <iframe id="game-iframe" frameborder="0" allowfullscreen allow="autoplay"></iframe>
+            </div>
+        </div>
+
+        <section class="contact" data-aos="fade-up">
+            <h2>Contact Me</h2>
+            <div class="contact-info">
+                <p>📱 Phone: <a href="tel:+918792048404">+91 8792048404</a></p>
+                <p>📧 Email: <a href="mailto:mithungowda5694@gmail.com">mithungowwda569@gmail.com</a></p>
+                <p>💼 LinkedIn: <a href="https://www.linkedin.com/in/mithun-r1" target="_blank">linkedin.com/in/mithun-r1</a></p>
+            </div>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
