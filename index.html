@@ -2,6 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <!-- Ensures proper scaling on mobile devices -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Mithun R Portfolio</title>
     <!-- Google Fonts -->
@@ -10,7 +11,7 @@
       rel="stylesheet"
     />
     <style>
-      /* Reset & Global Styles */
+      /* Global Reset and Base Styles */
       * {
         margin: 0;
         padding: 0;
@@ -22,7 +23,7 @@
         background: #000;
         overflow-x: hidden;
       }
-      /* Three.js Background Canvas */
+      /* Fullscreen Three.js Canvas Background */
       canvas#bg {
         position: fixed;
         top: 0;
@@ -69,7 +70,7 @@
         z-index: 5;
         padding: 120px 50px 50px;
       }
-      /* Section Styles */
+      /* Section Styling */
       section {
         margin: 80px 0;
         padding: 40px;
@@ -89,7 +90,7 @@
       section li {
         line-height: 1.6;
       }
-      /* Projects Grid & 3D Card Flip */
+      /* Projects Grid & 3D Card Flip Effect */
       .projects-grid {
         display: flex;
         flex-wrap: wrap;
@@ -146,7 +147,7 @@
         background: #00ffcc;
         color: #000;
       }
-      /* Experience & Education Items */
+      /* Experience and Education Items */
       .experience-item,
       .education-item {
         margin-bottom: 20px;
@@ -168,7 +169,7 @@
         border-radius: 5px;
         border: 1px solid #00ffcc;
       }
-      /* Responsive Adjustments */
+      /* Responsive Adjustments for Tablets and Mobile */
       @media (max-width: 768px) {
         .project-card {
           width: calc(50% - 20px);
@@ -178,8 +179,31 @@
         nav {
           padding: 10px 20px;
         }
+        nav .logo {
+          font-size: 20px;
+        }
+        nav ul li a {
+          font-size: 14px;
+        }
         .container {
           padding: 100px 20px 20px;
+        }
+        section {
+          padding: 20px;
+          margin: 40px 0;
+        }
+        section h1 {
+          font-size: 28px;
+        }
+        section h2 {
+          font-size: 24px;
+        }
+        section h3 {
+          font-size: 20px;
+        }
+        section p,
+        section li {
+          font-size: 14px;
         }
         .project-card {
           width: 100%;
@@ -190,7 +214,6 @@
   <body>
     <!-- Three.js Galaxy Background Canvas -->
     <canvas id="bg"></canvas>
-
     <!-- Navigation -->
     <nav>
       <div class="logo">Mithun R</div>
@@ -203,8 +226,7 @@
         <li><a href="#contact">Contact</a></li>
       </ul>
     </nav>
-
-    <!-- Portfolio Content -->
+    <!-- Main Portfolio Content -->
     <div class="container">
       <!-- Home / Summary Section -->
       <section id="home">
@@ -225,7 +247,6 @@
           advancements.
         </p>
       </section>
-
       <!-- Projects Section -->
       <section id="projects">
         <h2>Projects</h2>
@@ -259,12 +280,12 @@
                 <p>
                   Utilize AI to detect tyre cracks and enhance safety and
                   maintenance.
+                </p>
                 <a
                   href="https://tyre-two.vercel.app"
                   target="_blank"
                   rel="noopener noreferrer"
                   >Visit Project</a
-                >
                 >
               </div>
             </div>
@@ -277,12 +298,12 @@
               </div>
               <div class="card-back">
                 <p>
+                  AI-powered plant care solutions for optimal growth and health.
+                </p>
                 <a
                   href="https://plant12.vercel.app"
                   target="_blank"
                   rel="noopener noreferrer"
-                  >Visit Project</a
-                >
                   >Visit Project</a
                 >
               </div>
@@ -290,7 +311,6 @@
           </div>
         </div>
       </section>
-
       <!-- Experience Section -->
       <section id="experience">
         <h2>Experience</h2>
@@ -313,14 +333,12 @@
           </ul>
         </div>
       </section>
-
       <!-- Education Section -->
       <section id="education">
         <h2>Education</h2>
         <div class="education-item">
           <h3>
-            B.Tech in Information Science <br />
-            <small>(Minor in Web Development)</small>
+            B.Tech in Information Science <br /><small>(Minor in Web Development)</small>
           </h3>
           <span
             >Nagarjuna College of Engineering and Technology, Devanahalli,
@@ -335,9 +353,7 @@
             <li>
               Secured a top 10 position in CSS Battles at NIT Surathkal.
             </li>
-            <li>
-              Won the Hackathon at Sai Vidya Engineering College.
-            </li>
+            <li>Won the Hackathon at Sai Vidya Engineering College.</li>
             <li>
               Winner of the Ideathon conducted by the Computer Science branch
               at Nagarjuna College of Engineering.
@@ -349,7 +365,6 @@
           </ul>
         </div>
       </section>
-
       <!-- Skills Section -->
       <section id="skills">
         <h2>Skills</h2>
@@ -373,7 +388,6 @@
           <div class="skill-item">Communication &amp; Clarity</div>
         </div>
       </section>
-
       <!-- Contact Section -->
       <section id="contact">
         <h2>Contact</h2>
@@ -388,11 +402,10 @@
         </p>
       </section>
     </div>
-
-    <!-- Three.js Library -->
+    <!-- Three.js Library from CDN -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script>
-      // Global variables for Three.js scene
+      // Global variables for the Three.js scene
       let scene, camera, renderer, galaxy;
 
       function init() {
@@ -413,16 +426,16 @@
         renderer.setSize(window.innerWidth, window.innerHeight);
         renderer.setPixelRatio(window.devicePixelRatio);
 
-        // Create the swirling galaxy background
+        // Build the galaxy background
         createGalaxy();
 
-        // Adjust canvas on window resize
+        // Handle window resize events
         window.addEventListener("resize", onWindowResize, false);
         animate();
       }
 
       function createGalaxy() {
-        // Galaxy parameters
+        // Parameters for the galaxy
         const parameters = {
           count: 10000,
           size: 0.7,
@@ -474,10 +487,7 @@
           colors[i3 + 2] = mixedColor.b;
         }
 
-        geometry.setAttribute(
-          "position",
-          new THREE.BufferAttribute(positions, 3)
-        );
+        geometry.setAttribute("position", new THREE.BufferAttribute(positions, 3));
         geometry.setAttribute("color", new THREE.BufferAttribute(colors, 3));
 
         const material = new THREE.PointsMaterial({
@@ -500,7 +510,7 @@
 
       function animate() {
         requestAnimationFrame(animate);
-        // Slow rotation for a dynamic galaxy effect
+        // Apply a slow rotation to the galaxy for a dynamic background effect
         if (galaxy) {
           galaxy.rotation.y += 0.0005;
           galaxy.rotation.x += 0.0002;
@@ -522,4 +532,5 @@
     </script>
   </body>
 </html>
+
 
