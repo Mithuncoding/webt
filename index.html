@@ -42,10 +42,12 @@
         padding: 20px 50px;
         background: rgba(0, 0, 0, 0.5);
       }
+      /* Logo styling with nowrap to keep it on one line */
       nav .logo {
         font-size: 24px;
         font-weight: 600;
         color: #00ffcc;
+        white-space: nowrap;
       }
       nav ul {
         list-style: none;
@@ -64,11 +66,23 @@
         color: #00ffcc;
         transform: translateY(-3px);
       }
-      /* Ensure nav items are scrollable on small screens */
+      /* On mobile, stack the logo and navigation */
       @media (max-width: 480px) {
+        nav {
+          flex-direction: column;
+          align-items: center;
+          padding: 10px 20px;
+        }
+        nav .logo {
+          font-size: 20px;
+        }
         nav ul {
           overflow-x: auto;
           white-space: nowrap;
+          margin-top: 10px;
+        }
+        nav ul li a {
+          font-size: 14px;
         }
       }
       /* Main Container for Portfolio Content */
@@ -195,15 +209,6 @@
         }
       }
       @media (max-width: 480px) {
-        nav {
-          padding: 10px 20px;
-        }
-        nav .logo {
-          font-size: 20px;
-        }
-        nav ul li a {
-          font-size: 14px;
-        }
         .container {
           padding: 100px 20px 20px;
         }
@@ -279,8 +284,13 @@
                 <h3>AI Quiz Generator</h3>
               </div>
               <div class="card-back">
-                <p>Generate quizzes using AI to streamline content creation.</p>
-                <a href="https://quiz-alpha-hazel-69.vercel.app" target="_blank" rel="noopener noreferrer"
+                <p>
+                  Generate quizzes using AI to streamline content creation.
+                </p>
+                <a
+                  href="https://quiz-alpha-hazel-69.vercel.app"
+                  target="_blank"
+                  rel="noopener"
                   >Visit Project</a
                 >
               </div>
@@ -297,7 +307,12 @@
                   Utilize AI to detect tyre cracks and enhance safety and
                   maintenance.
                 </p>
-                <a href="https://tyre-two.vercel.app" target="_blank" rel="noopener noreferrer">Visit Project</a>
+                <a
+                  href="https://tyre-two.vercel.app"
+                  target="_blank"
+                  rel="noopener"
+                  >Visit Project</a
+                >
               </div>
             </div>
           </div>
@@ -311,7 +326,12 @@
                 <p>
                   AI-powered plant care solutions for optimal growth and health.
                 </p>
-                <a href="https://plant12.vercel.app" target="_blank" rel="noopener noreferrer">Visit Project</a>
+                <a
+                  href="https://plant12.vercel.app"
+                  target="_blank"
+                  rel="noopener"
+                  >Visit Project</a
+                >
               </div>
             </div>
           </div>
@@ -346,18 +366,15 @@
         <h2>Education</h2>
         <div class="education-item">
           <h3>
-            B.Tech in Information Science
-            <br /><small>(Minor in Web Development)</small>
+            B.Tech in Information Science<br /><small>(Minor in Web Development)</small>
           </h3>
           <span>
-            Nagarjuna College of Engineering and Technology, Devanahalli,
-            Bengaluru – 2026
+            Nagarjuna College of Engineering and Technology, Devanahalli, Bengaluru – 2026
           </span>
           <p>CGPA: 8.85 (in 5 semesters)</p>
           <ul>
             <li>
-              Ranked among the top 20 in Sridevi Engineering College for
-              academic/technical performance.
+              Ranked among the top 20 in Sridevi Engineering College for academic/technical performance.
             </li>
             <li>
               Secured a top 10 position in CSS Battles at NIT Surathkal.
@@ -366,12 +383,10 @@
               Won the Hackathon at Sai Vidya Engineering College.
             </li>
             <li>
-              Winner of the Ideathon conducted by the Computer Science branch at
-              Nagarjuna College of Engineering.
+              Winner of the Ideathon conducted by the Computer Science branch at Nagarjuna College of Engineering.
             </li>
             <li>
-              Got certified in 5+ courses from renowned educators (Coursera, Udemy,
-              GeekForGeeks).
+              Got certified in 5+ courses from renowned educators (Coursera, Udemy, GeekForGeeks).
             </li>
           </ul>
         </div>
@@ -440,12 +455,12 @@
       }
       function createGalaxy() {
         const parameters = {
-          count: 10000,
+          count: 15000,
           size: 0.7,
-          radius: 80,
+          radius: 120,
           branches: 5,
           spin: 1.2,
-          randomness: 0.5,
+          randomness: 0.6,
           randomnessPower: 3,
           insideColor: new THREE.Color(0xff6030),
           outsideColor: new THREE.Color(0x1b3984),
@@ -474,11 +489,9 @@
             (Math.random() < 0.5 ? 1 : -1) *
             parameters.randomness *
             radius;
-          positions[i3 + 0] =
-            Math.cos(branchAngle + spinAngle) * radius + randomX;
+          positions[i3 + 0] = Math.cos(branchAngle + spinAngle) * radius + randomX;
           positions[i3 + 1] = randomY;
-          positions[i3 + 2] =
-            Math.sin(branchAngle + spinAngle) * radius + randomZ;
+          positions[i3 + 2] = Math.sin(branchAngle + spinAngle) * radius + randomZ;
           const mixedColor = parameters.insideColor.clone();
           mixedColor.lerp(parameters.outsideColor, radius / parameters.radius);
           colors[i3 + 0] = mixedColor.r;
@@ -514,14 +527,13 @@
       document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
         anchor.addEventListener("click", function (e) {
           e.preventDefault();
-          document
-            .querySelector(this.getAttribute("href"))
-            .scrollIntoView({ behavior: "smooth" });
+          document.querySelector(this.getAttribute("href")).scrollIntoView({ behavior: "smooth" });
         });
       });
     </script>
   </body>
 </html>
+
 
 
 
