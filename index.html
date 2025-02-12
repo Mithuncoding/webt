@@ -18,7 +18,7 @@
         box-sizing: border-box;
       }
       body {
-        font-family: 'Poppins', sans-serif;
+        font-family: "Poppins", sans-serif;
         color: #fff;
         background: #000;
         overflow-x: hidden;
@@ -64,6 +64,13 @@
         color: #00ffcc;
         transform: translateY(-3px);
       }
+      /* Ensure nav items are scrollable on small screens */
+      @media (max-width: 480px) {
+        nav ul {
+          overflow-x: auto;
+          white-space: nowrap;
+        }
+      }
       /* Main Container for Portfolio Content */
       .container {
         position: relative;
@@ -90,7 +97,7 @@
       section li {
         line-height: 1.6;
       }
-      /* Projects Grid & 3D Card Flip Effect */
+      /* Projects Grid & Improved 3D Card Flip Effect */
       .projects-grid {
         display: flex;
         flex-wrap: wrap;
@@ -99,6 +106,11 @@
       .project-card {
         width: calc(33.333% - 20px);
         perspective: 1000px;
+        transition: transform 0.3s, box-shadow 0.3s;
+      }
+      .project-card:hover {
+        transform: scale(1.05);
+        box-shadow: 0 10px 20px rgba(0, 255, 204, 0.4);
       }
       .card-inner {
         position: relative;
@@ -169,7 +181,14 @@
         border-radius: 5px;
         border: 1px solid #00ffcc;
       }
-      /* Responsive Adjustments for Tablets and Mobile */
+      /* Email link color adjustment for dark background */
+      a[href^="mailto:"] {
+        color: #ddd;
+      }
+      a[href^="mailto:"]:hover {
+        color: #fff;
+      }
+      /* Responsive Adjustments */
       @media (max-width: 768px) {
         .project-card {
           width: calc(50% - 20px);
@@ -214,7 +233,8 @@
   <body>
     <!-- Three.js Galaxy Background Canvas -->
     <canvas id="bg"></canvas>
-    <!-- Navigation -->
+
+    <!-- Navigation Bar -->
     <nav>
       <div class="logo">Mithun R</div>
       <ul>
@@ -226,27 +246,28 @@
         <li><a href="#contact">Contact</a></li>
       </ul>
     </nav>
+
     <!-- Main Portfolio Content -->
     <div class="container">
       <!-- Home / Summary Section -->
       <section id="home">
         <h1>Welcome!</h1>
         <p>
-          Possesses versatile skills in project management, problem-solving,
-          and collaboration. Brings a fresh perspective and a strong commitment
-          to quality and success. Recognized for adaptability and a proactive
+          Possesses versatile skills in project management, problem-solving, and
+          collaboration. Brings a fresh perspective and a strong commitment to
+          quality and success. Recognized for adaptability and a proactive
           approach in delivering effective solutions.
         </p>
         <p>
-          Tech-savvy innovator with hands-on experience in emerging
-          technologies and a passion for continuous improvement. Skilled in
-          identifying opportunities for technological enhancements and
-          implementing effective solutions. Adept at leveraging new tools and
-          methods to solve problems and enhance productivity. Excels in
-          adapting to fast-paced environments and driving technological
-          advancements.
+          Tech-savvy innovator with hands-on experience in emerging technologies
+          and a passion for continuous improvement. Skilled in identifying
+          opportunities for technological enhancements and implementing effective
+          solutions. Adept at leveraging new tools and methods to solve problems
+          and enhance productivity. Excels in adapting to fast-paced environments
+          and driving technological advancements.
         </p>
       </section>
+
       <!-- Projects Section -->
       <section id="projects">
         <h2>Projects</h2>
@@ -258,13 +279,8 @@
                 <h3>AI Quiz Generator</h3>
               </div>
               <div class="card-back">
-                <p>
-                  Generate quizzes using AI to streamline content creation.
-                </p>
-                <a
-                  href="https://quiz-alpha-hazel-69.vercel.app"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                <p>Generate quizzes using AI to streamline content creation.</p>
+                <a href="https://quiz-alpha-hazel-69.vercel.app" target="_blank" rel="noopener noreferrer"
                   >Visit Project</a
                 >
               </div>
@@ -281,12 +297,7 @@
                   Utilize AI to detect tyre cracks and enhance safety and
                   maintenance.
                 </p>
-                <a
-                  href="https://tyre-two.vercel.app"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  >Visit Project</a
-                >
+                <a href="https://tyre-two.vercel.app" target="_blank" rel="noopener noreferrer">Visit Project</a>
               </div>
             </div>
           </div>
@@ -300,17 +311,13 @@
                 <p>
                   AI-powered plant care solutions for optimal growth and health.
                 </p>
-                <a
-                  href="https://plant12.vercel.app"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  >Visit Project</a
-                >
+                <a href="https://plant12.vercel.app" target="_blank" rel="noopener noreferrer">Visit Project</a>
               </div>
             </div>
           </div>
         </div>
       </section>
+
       <!-- Experience Section -->
       <section id="experience">
         <h2>Experience</h2>
@@ -333,17 +340,19 @@
           </ul>
         </div>
       </section>
+
       <!-- Education Section -->
       <section id="education">
         <h2>Education</h2>
         <div class="education-item">
           <h3>
-            B.Tech in Information Science <br /><small>(Minor in Web Development)</small>
+            B.Tech in Information Science
+            <br /><small>(Minor in Web Development)</small>
           </h3>
-          <span
-            >Nagarjuna College of Engineering and Technology, Devanahalli,
-            Bengaluru – 2026</span
-          >
+          <span>
+            Nagarjuna College of Engineering and Technology, Devanahalli,
+            Bengaluru – 2026
+          </span>
           <p>CGPA: 8.85 (in 5 semesters)</p>
           <ul>
             <li>
@@ -353,18 +362,21 @@
             <li>
               Secured a top 10 position in CSS Battles at NIT Surathkal.
             </li>
-            <li>Won the Hackathon at Sai Vidya Engineering College.</li>
             <li>
-              Winner of the Ideathon conducted by the Computer Science branch
-              at Nagarjuna College of Engineering.
+              Won the Hackathon at Sai Vidya Engineering College.
             </li>
             <li>
-              Got certified in 5+ courses from renowned educators (Coursera,
-              Udemy, GeekForGeeks).
+              Winner of the Ideathon conducted by the Computer Science branch at
+              Nagarjuna College of Engineering.
+            </li>
+            <li>
+              Got certified in 5+ courses from renowned educators (Coursera, Udemy,
+              GeekForGeeks).
             </li>
           </ul>
         </div>
       </section>
+
       <!-- Skills Section -->
       <section id="skills">
         <h2>Skills</h2>
@@ -388,6 +400,7 @@
           <div class="skill-item">Communication &amp; Clarity</div>
         </div>
       </section>
+
       <!-- Contact Section -->
       <section id="contact">
         <h2>Contact</h2>
@@ -396,20 +409,16 @@
         <p>Phone: 8792048404</p>
         <p>
           Email:
-          <a href="mailto:mithungowda5694@gmail.com"
-            >mithungowda5694@gmail.com</a
-          >
+          <a href="mailto:mithungowda5694@gmail.com">mithungowda5694@gmail.com</a>
         </p>
       </section>
     </div>
+
     <!-- Three.js Library from CDN -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script>
-      // Global variables for the Three.js scene
       let scene, camera, renderer, galaxy;
-
       function init() {
-        // Create scene, camera, and renderer
         scene = new THREE.Scene();
         camera = new THREE.PerspectiveCamera(
           75,
@@ -425,17 +434,11 @@
         });
         renderer.setSize(window.innerWidth, window.innerHeight);
         renderer.setPixelRatio(window.devicePixelRatio);
-
-        // Build the galaxy background
         createGalaxy();
-
-        // Handle window resize events
         window.addEventListener("resize", onWindowResize, false);
         animate();
       }
-
       function createGalaxy() {
-        // Parameters for the galaxy
         const parameters = {
           count: 10000,
           size: 0.7,
@@ -447,11 +450,9 @@
           insideColor: new THREE.Color(0xff6030),
           outsideColor: new THREE.Color(0x1b3984),
         };
-
         const geometry = new THREE.BufferGeometry();
         const positions = new Float32Array(parameters.count * 3);
         const colors = new Float32Array(parameters.count * 3);
-
         for (let i = 0; i < parameters.count; i++) {
           const i3 = i * 3;
           const radius = Math.random() * parameters.radius;
@@ -473,23 +474,19 @@
             (Math.random() < 0.5 ? 1 : -1) *
             parameters.randomness *
             radius;
-
           positions[i3 + 0] =
             Math.cos(branchAngle + spinAngle) * radius + randomX;
           positions[i3 + 1] = randomY;
           positions[i3 + 2] =
             Math.sin(branchAngle + spinAngle) * radius + randomZ;
-
           const mixedColor = parameters.insideColor.clone();
           mixedColor.lerp(parameters.outsideColor, radius / parameters.radius);
           colors[i3 + 0] = mixedColor.r;
           colors[i3 + 1] = mixedColor.g;
           colors[i3 + 2] = mixedColor.b;
         }
-
         geometry.setAttribute("position", new THREE.BufferAttribute(positions, 3));
         geometry.setAttribute("color", new THREE.BufferAttribute(colors, 3));
-
         const material = new THREE.PointsMaterial({
           size: parameters.size,
           sizeAttenuation: true,
@@ -497,30 +494,23 @@
           blending: THREE.AdditiveBlending,
           vertexColors: true,
         });
-
         galaxy = new THREE.Points(geometry, material);
         scene.add(galaxy);
       }
-
       function onWindowResize() {
         camera.aspect = window.innerWidth / window.innerHeight;
         camera.updateProjectionMatrix();
         renderer.setSize(window.innerWidth, window.innerHeight);
       }
-
       function animate() {
         requestAnimationFrame(animate);
-        // Apply a slow rotation to the galaxy for a dynamic background effect
         if (galaxy) {
           galaxy.rotation.y += 0.0005;
           galaxy.rotation.x += 0.0002;
         }
         renderer.render(scene, camera);
       }
-
       init();
-
-      // Smooth scrolling for navigation links
       document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
         anchor.addEventListener("click", function (e) {
           e.preventDefault();
@@ -532,5 +522,6 @@
     </script>
   </body>
 </html>
+
 
 
