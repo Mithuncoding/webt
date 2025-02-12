@@ -36,19 +36,21 @@
         top: 0;
         width: 100%;
         z-index: 10;
+        padding: 20px 50px;
+        background: rgba(0, 0, 0, 0.5);
+        /* Default desktop: logo and links side by side */
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding: 20px 50px;
-        background: rgba(0, 0, 0, 0.5);
       }
-      /* Logo styling with nowrap to keep it on one line */
+      /* Logo styling – force one line */
       nav .logo {
         font-size: 24px;
         font-weight: 600;
         color: #00ffcc;
         white-space: nowrap;
       }
+      /* Navigation list – desktop */
       nav ul {
         list-style: none;
         display: flex;
@@ -66,7 +68,7 @@
         color: #00ffcc;
         transform: translateY(-3px);
       }
-      /* On mobile, stack the logo and navigation */
+      /* Mobile Navigation: Stack the logo above a scrollable nav list */
       @media (max-width: 480px) {
         nav {
           flex-direction: column;
@@ -75,11 +77,22 @@
         }
         nav .logo {
           font-size: 20px;
+          margin-bottom: 10px;
         }
         nav ul {
+          /* Make the nav list horizontally scrollable */
+          display: flex;
+          flex-wrap: nowrap;
           overflow-x: auto;
           white-space: nowrap;
-          margin-top: 10px;
+          overscroll-behavior-x: contain;
+          width: 100%;
+          margin-top: 0;
+          padding-bottom: 5px;
+        }
+        nav ul li {
+          flex: 0 0 auto;
+          margin-left: 20px;
         }
         nav ul li a {
           font-size: 14px;
@@ -202,7 +215,7 @@
       a[href^="mailto:"]:hover {
         color: #fff;
       }
-      /* Responsive Adjustments */
+      /* Responsive Adjustments for Project Cards and Content */
       @media (max-width: 768px) {
         .project-card {
           width: calc(50% - 20px);
@@ -527,12 +540,15 @@
       document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
         anchor.addEventListener("click", function (e) {
           e.preventDefault();
-          document.querySelector(this.getAttribute("href")).scrollIntoView({ behavior: "smooth" });
+          document
+            .querySelector(this.getAttribute("href"))
+            .scrollIntoView({ behavior: "smooth" });
         });
       });
     </script>
   </body>
 </html>
+
 
 
 
