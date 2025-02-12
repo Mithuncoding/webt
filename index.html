@@ -1,79 +1,525 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mithun | Game Hub</title>
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-</head>
-<body>
-    <div class="construction-notice">
-        Website under construction. Enjoy these games while the main site is being built! Expected completion: March 2025
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mithun R Portfolio</title>
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      /* Reset & Global Styles */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: 'Poppins', sans-serif;
+        color: #fff;
+        background: #000;
+        overflow-x: hidden;
+      }
+      /* Three.js Background Canvas */
+      canvas#bg {
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 1;
+      }
+      /* Navigation Bar */
+      nav {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        z-index: 10;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px 50px;
+        background: rgba(0, 0, 0, 0.5);
+      }
+      nav .logo {
+        font-size: 24px;
+        font-weight: 600;
+        color: #00ffcc;
+      }
+      nav ul {
+        list-style: none;
+        display: flex;
+      }
+      nav ul li {
+        margin-left: 20px;
+      }
+      nav ul li a {
+        text-decoration: none;
+        color: #fff;
+        font-weight: 500;
+        transition: color 0.3s ease, transform 0.3s ease;
+      }
+      nav ul li a:hover {
+        color: #00ffcc;
+        transform: translateY(-3px);
+      }
+      /* Main Container for Portfolio Content */
+      .container {
+        position: relative;
+        z-index: 5;
+        padding: 120px 50px 50px;
+      }
+      /* Section Styles */
+      section {
+        margin: 80px 0;
+        padding: 40px;
+        background: rgba(0, 0, 0, 0.6);
+        border-radius: 10px;
+        box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+        -webkit-backdrop-filter: blur(8px);
+        backdrop-filter: blur(8px);
+      }
+      section h1,
+      section h2,
+      section h3 {
+        margin-bottom: 20px;
+        color: #00ffcc;
+      }
+      section p,
+      section li {
+        line-height: 1.6;
+      }
+      /* Projects Grid & 3D Card Flip */
+      .projects-grid {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+      }
+      .project-card {
+        width: calc(33.333% - 20px);
+        perspective: 1000px;
+      }
+      .card-inner {
+        position: relative;
+        width: 100%;
+        padding-top: 100%;
+        transition: transform 0.8s;
+        transform-style: preserve-3d;
+      }
+      .project-card:hover .card-inner {
+        transform: rotateY(180deg);
+      }
+      .card-front,
+      .card-back {
+        position: absolute;
+        top: 0;
+        left: 0;
+        backface-visibility: hidden;
+        width: 100%;
+        height: 100%;
+        border: 2px solid #00ffcc;
+        border-radius: 10px;
+        padding: 10px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+      .card-front {
+        background: rgba(0, 0, 0, 0.8);
+      }
+      .card-back {
+        background: rgba(0, 0, 0, 0.9);
+        transform: rotateY(180deg);
+        text-align: center;
+      }
+      .card-back a {
+        margin-top: 10px;
+        color: #00ffcc;
+        text-decoration: none;
+        border: 1px solid #00ffcc;
+        padding: 5px 10px;
+        border-radius: 5px;
+        transition: background 0.3s ease, color 0.3s ease;
+      }
+      .card-back a:hover {
+        background: #00ffcc;
+        color: #000;
+      }
+      /* Experience & Education Items */
+      .experience-item,
+      .education-item {
+        margin-bottom: 20px;
+      }
+      .experience-item span,
+      .education-item span {
+        font-style: italic;
+        font-size: 0.9rem;
+      }
+      /* Skills Section */
+      .skills-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+      .skill-item {
+        background: rgba(0, 0, 0, 0.7);
+        padding: 10px 15px;
+        border-radius: 5px;
+        border: 1px solid #00ffcc;
+      }
+      /* Responsive Adjustments */
+      @media (max-width: 768px) {
+        .project-card {
+          width: calc(50% - 20px);
+        }
+      }
+      @media (max-width: 480px) {
+        nav {
+          padding: 10px 20px;
+        }
+        .container {
+          padding: 100px 20px 20px;
+        }
+        .project-card {
+          width: 100%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Three.js Galaxy Background Canvas -->
+    <canvas id="bg"></canvas>
+
+    <!-- Navigation -->
+    <nav>
+      <div class="logo">Mithun R</div>
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#education">Education</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+
+    <!-- Portfolio Content -->
+    <div class="container">
+      <!-- Home / Summary Section -->
+      <section id="home">
+        <h1>Welcome!</h1>
+        <p>
+          Possesses versatile skills in project management, problem-solving,
+          and collaboration. Brings a fresh perspective and a strong commitment
+          to quality and success. Recognized for adaptability and a proactive
+          approach in delivering effective solutions.
+        </p>
+        <p>
+          Tech-savvy innovator with hands-on experience in emerging
+          technologies and a passion for continuous improvement. Skilled in
+          identifying opportunities for technological enhancements and
+          implementing effective solutions. Adept at leveraging new tools and
+          methods to solve problems and enhance productivity. Excels in
+          adapting to fast-paced environments and driving technological
+          advancements.
+        </p>
+      </section>
+
+      <!-- Projects Section -->
+      <section id="projects">
+        <h2>Projects</h2>
+        <div class="projects-grid">
+          <!-- Project 1 -->
+          <div class="project-card">
+            <div class="card-inner">
+              <div class="card-front">
+                <h3>AI Quiz Generator</h3>
+              </div>
+              <div class="card-back">
+                <p>
+                  Generate quizzes using AI to streamline content creation.
+                </p>
+                <a
+                  href="https://quiz-alpha-hazel-69.vercel.app"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  >Visit Project</a
+                >
+              </div>
+            </div>
+          </div>
+          <!-- Project 2 -->
+          <div class="project-card">
+            <div class="card-inner">
+              <div class="card-front">
+                <h3>Tyre Crack Detection</h3>
+              </div>
+              <div class="card-back">
+                <p>
+                  Utilize AI to detect tyre cracks and enhance safety and
+                  maintenance.
+                <a
+                  href="https://tyre-two.vercel.app"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  >Visit Project</a
+                >
+                >
+              </div>
+            </div>
+          </div>
+          <!-- Project 3 -->
+          <div class="project-card">
+            <div class="card-inner">
+              <div class="card-front">
+                <h3>Plant Care AI</h3>
+              </div>
+              <div class="card-back">
+                <p>
+                <a
+                  href="https://plant12.vercel.app"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  >Visit Project</a
+                >
+                  >Visit Project</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Experience Section -->
+      <section id="experience">
+        <h2>Experience</h2>
+        <div class="experience-item">
+          <h3>Intern at SkillCraft Technology</h3>
+          <span>September 2024 – October 2024, Bengaluru, India</span>
+          <ul>
+            <li>
+              Assisted in software development and debugging to improve
+              application performance.
+            </li>
+            <li>
+              Worked with Python, Java, and web technologies to develop and
+              optimize features.
+            </li>
+            <li>
+              Collaborated with the team to integrate APIs and automate
+              processes for efficiency.
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- Education Section -->
+      <section id="education">
+        <h2>Education</h2>
+        <div class="education-item">
+          <h3>
+            B.Tech in Information Science <br />
+            <small>(Minor in Web Development)</small>
+          </h3>
+          <span
+            >Nagarjuna College of Engineering and Technology, Devanahalli,
+            Bengaluru – 2026</span
+          >
+          <p>CGPA: 8.85 (in 5 semesters)</p>
+          <ul>
+            <li>
+              Ranked among the top 20 in Sridevi Engineering College for
+              academic/technical performance.
+            </li>
+            <li>
+              Secured a top 10 position in CSS Battles at NIT Surathkal.
+            </li>
+            <li>
+              Won the Hackathon at Sai Vidya Engineering College.
+            </li>
+            <li>
+              Winner of the Ideathon conducted by the Computer Science branch
+              at Nagarjuna College of Engineering.
+            </li>
+            <li>
+              Got certified in 5+ courses from renowned educators (Coursera,
+              Udemy, GeekForGeeks).
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- Skills Section -->
+      <section id="skills">
+        <h2>Skills</h2>
+        <div class="skills-list">
+          <div class="skill-item">HTML</div>
+          <div class="skill-item">CSS</div>
+          <div class="skill-item">JavaScript</div>
+          <div class="skill-item">Python</div>
+          <div class="skill-item">C</div>
+          <div class="skill-item">C++</div>
+          <div class="skill-item">Java</div>
+          <div class="skill-item">Data Structures &amp; Algorithms</div>
+          <div class="skill-item">API Development &amp; Integration</div>
+          <div class="skill-item">Project Management</div>
+          <div class="skill-item">
+            AI &amp; ML Tools (ChatGPT, Claude, Gemini, DeepSeek, etc.)
+          </div>
+          <div class="skill-item">
+            Computer Science Fundamentals (OS, CN, DBMS)
+          </div>
+          <div class="skill-item">Communication &amp; Clarity</div>
+        </div>
+      </section>
+
+      <!-- Contact Section -->
+      <section id="contact">
+        <h2>Contact</h2>
+        <p><strong>Mithun R</strong></p>
+        <p>Bengaluru, India 560002</p>
+        <p>Phone: 8792048404</p>
+        <p>
+          Email:
+          <a href="mailto:mithungowda5694@gmail.com"
+            >mithungowda5694@gmail.com</a
+          >
+        </p>
+      </section>
     </div>
 
-    <div id="three-container"></div>
+    <!-- Three.js Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script>
+      // Global variables for Three.js scene
+      let scene, camera, renderer, galaxy;
 
-    <header class="hero">
-        <div class="hero-content" data-aos="fade-up">
-            <h1>Hi, I'm Mithun</h1>
-            <p class="subtitle">Software Developer</p>
-            <div class="typing-container">
-                <span id="typing-text"></span><span class="cursor">|</span>
-            </div>
-        </div>
-    </header>
+      function init() {
+        // Create scene, camera, and renderer
+        scene = new THREE.Scene();
+        camera = new THREE.PerspectiveCamera(
+          75,
+          window.innerWidth / window.innerHeight,
+          0.1,
+          1000
+        );
+        camera.position.z = 100;
+        renderer = new THREE.WebGLRenderer({
+          canvas: document.getElementById("bg"),
+          alpha: true,
+          antialias: true,
+        });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(window.devicePixelRatio);
 
-    <main>
-        <section class="games-section" data-aos="fade-up">
-            <h2>Featured Games</h2>
-            <div class="games-grid">
-                <div class="game-card" data-game="pacman">
-                    <h3>Pac-Man</h3>
-                    <p>Classic arcade maze game</p>
-                </div>
-                <div class="game-card" data-game="snake">
-                    <h3>Snake.io</h3>
-                    <p>Modern multiplayer snake</p>
-                </div>
-                <div class="game-card" data-game="minesweeper">
-                    <h3>Minesweeper</h3>
-                    <p>Classic puzzle game</p>
-                </div>
-                <div class="game-card" data-game="2048">
-                    <h3>2048</h3>
-                    <p>Number sliding puzzle</p>
-                </div>
-                <div class="game-card" data-game="mario">
-                    <h3>Super Mario</h3>
-                    <p>Classic platformer game</p>
-                </div>
-                <div class="game-card" data-game="dino">
-                    <h3>Chrome Dino</h3>
-                    <p>T-Rex Runner Game</p>
-                </div>
-            </div>
-        </section>
+        // Create the swirling galaxy background
+        createGalaxy();
 
-        <div id="game-container" class="hidden">
-            <button id="close-game">Close Game</button>
-            <div id="game-canvas">
-                <iframe id="game-iframe" frameborder="0" allowfullscreen allow="autoplay"></iframe>
-            </div>
-        </div>
+        // Adjust canvas on window resize
+        window.addEventListener("resize", onWindowResize, false);
+        animate();
+      }
 
-        <section class="contact" data-aos="fade-up">
-            <h2>Contact Me</h2>
-            <div class="contact-info">
-                <p>📱 Phone: <a href="tel:+918792048404">+91 8792048404</a></p>
-                <p>📧 Email: <a href="mailto:mithungowda5694@gmail.com">mithungowda5694@gmail.com</a></p>
-                <p>💼 LinkedIn: <a href="https://www.linkedin.com/in/mithun-r1" target="_blank">linkedin.com/in/mithun-r1</a></p>
-            </div>
-        </section>
-    </main>
+      function createGalaxy() {
+        // Galaxy parameters
+        const parameters = {
+          count: 10000,
+          size: 0.7,
+          radius: 80,
+          branches: 5,
+          spin: 1.2,
+          randomness: 0.5,
+          randomnessPower: 3,
+          insideColor: new THREE.Color(0xff6030),
+          outsideColor: new THREE.Color(0x1b3984),
+        };
 
-    <script src="script.js"></script>
-</body>
+        const geometry = new THREE.BufferGeometry();
+        const positions = new Float32Array(parameters.count * 3);
+        const colors = new Float32Array(parameters.count * 3);
+
+        for (let i = 0; i < parameters.count; i++) {
+          const i3 = i * 3;
+          const radius = Math.random() * parameters.radius;
+          const spinAngle = radius * parameters.spin;
+          const branchAngle =
+            ((i % parameters.branches) / parameters.branches) * Math.PI * 2;
+          const randomX =
+            Math.pow(Math.random(), parameters.randomnessPower) *
+            (Math.random() < 0.5 ? 1 : -1) *
+            parameters.randomness *
+            radius;
+          const randomY =
+            Math.pow(Math.random(), parameters.randomnessPower) *
+            (Math.random() < 0.5 ? 1 : -1) *
+            parameters.randomness *
+            radius;
+          const randomZ =
+            Math.pow(Math.random(), parameters.randomnessPower) *
+            (Math.random() < 0.5 ? 1 : -1) *
+            parameters.randomness *
+            radius;
+
+          positions[i3 + 0] =
+            Math.cos(branchAngle + spinAngle) * radius + randomX;
+          positions[i3 + 1] = randomY;
+          positions[i3 + 2] =
+            Math.sin(branchAngle + spinAngle) * radius + randomZ;
+
+          const mixedColor = parameters.insideColor.clone();
+          mixedColor.lerp(parameters.outsideColor, radius / parameters.radius);
+          colors[i3 + 0] = mixedColor.r;
+          colors[i3 + 1] = mixedColor.g;
+          colors[i3 + 2] = mixedColor.b;
+        }
+
+        geometry.setAttribute(
+          "position",
+          new THREE.BufferAttribute(positions, 3)
+        );
+        geometry.setAttribute("color", new THREE.BufferAttribute(colors, 3));
+
+        const material = new THREE.PointsMaterial({
+          size: parameters.size,
+          sizeAttenuation: true,
+          depthWrite: false,
+          blending: THREE.AdditiveBlending,
+          vertexColors: true,
+        });
+
+        galaxy = new THREE.Points(geometry, material);
+        scene.add(galaxy);
+      }
+
+      function onWindowResize() {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+      }
+
+      function animate() {
+        requestAnimationFrame(animate);
+        // Slow rotation for a dynamic galaxy effect
+        if (galaxy) {
+          galaxy.rotation.y += 0.0005;
+          galaxy.rotation.x += 0.0002;
+        }
+        renderer.render(scene, camera);
+      }
+
+      init();
+
+      // Smooth scrolling for navigation links
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
+          document
+            .querySelector(this.getAttribute("href"))
+            .scrollIntoView({ behavior: "smooth" });
+        });
+      });
+    </script>
+  </body>
 </html>
+
