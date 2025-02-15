@@ -4,6 +4,10 @@
     <meta charset="UTF-8" />
     <!-- Ensures proper scaling on mobile devices -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Theme color for browsers -->
+    <meta name="theme-color" content="#000000" />
+    <meta name="msapplication-navbutton-color" content="#000000" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
     <title>Mithun R Portfolio</title>
     <!-- Google Fonts -->
     <link
@@ -123,6 +127,16 @@
       section p,
       section li {
         line-height: 1.6;
+      }
+      /* Fade-in Animation for Sections */
+      section {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+      }
+      section.fade-in {
+        opacity: 1;
+        transform: translateY(0);
       }
       /* Projects Grid & Improved 3D Card Flip Effect */
       .projects-grid {
@@ -348,6 +362,44 @@
               </div>
             </div>
           </div>
+          <!-- Project 4: Sorting Algorithms Race -->
+          <div class="project-card">
+            <div class="card-inner">
+              <div class="card-front">
+                <h3>Sorting Algorithms Race</h3>
+              </div>
+              <div class="card-back">
+                <p>
+                  Race to sort arrays using various algorithms in this interactive challenge.
+                </p>
+                <a
+                  href="https://sorts-amber.vercel.app"
+                  target="_blank"
+                  rel="noopener"
+                  >Visit Project</a
+                >
+              </div>
+            </div>
+          </div>
+          <!-- Project 5: Advanced Periodic Table -->
+          <div class="project-card">
+            <div class="card-inner">
+              <div class="card-front">
+                <h3>Advanced Periodic Table</h3>
+              </div>
+              <div class="card-back">
+                <p>
+                  Explore elements interactively with advanced data visualizations.
+                </p>
+                <a
+                  href="https://periodic-two.vercel.app"
+                  target="_blank"
+                  rel="noopener"
+                  >Visit Project</a
+                >
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -537,6 +589,8 @@
         renderer.render(scene, camera);
       }
       init();
+
+      // Smooth scrolling for in-page anchors
       document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
         anchor.addEventListener("click", function (e) {
           e.preventDefault();
@@ -545,11 +599,22 @@
             .scrollIntoView({ behavior: "smooth" });
         });
       });
+
+      // Intersection Observer for fade-in animations on sections
+      document.addEventListener("DOMContentLoaded", function () {
+        const sections = document.querySelectorAll("section");
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("fade-in");
+              }
+            });
+          },
+          { threshold: 0.2 }
+        );
+        sections.forEach((section) => observer.observe(section));
+      });
     </script>
   </body>
 </html>
-
-
-
-
-
